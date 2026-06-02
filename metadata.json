@@ -1,0 +1,6 @@
+{
+  "name": "DynamicSoft Corporate Website",
+  "description": "The official corporate website for DynamicSoft, featuring solutions, products, industries, and support sections for a simulation analysis platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
