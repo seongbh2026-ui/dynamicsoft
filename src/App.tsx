@@ -45,7 +45,6 @@ const SITE_DATA = {
   copyright: '2026 Dynamicsoft',
   nav: [
     { id: 'home', label: 'Home' },
-    { id: 'solutions', label: '솔루션' },
     { id: 'industries', label: '산업분야' },
     { id: 'products', label: '제품안내' },
     { id: 'support', label: '고객지원' },
@@ -534,7 +533,6 @@ export default function App() {
   const renderView = () => {
     switch (activeTab) {
       case 'home': return <ViewHome />;
-      case 'solutions': return <ViewHome />; // 실질적으로 Home 뷰에 솔루션 핵심이 포함되어 있음
       case 'industries': return <ViewIndustries onSelectIndustry={(id) => { setSelectedIndustryId(id); setActiveTab('industry_detail'); }}/>;
       case 'industry_detail': return <IndustryDetail industryId={selectedIndustryId!} onBack={() => { setActiveTab('industries'); setSelectedIndustryId(null); }} />;
       case 'products': return <ViewProducts />;
@@ -637,7 +635,6 @@ export default function App() {
             <h4 className="text-slate-700 font-semibold mb-4 uppercase">Quick Links</h4>
             <ul className="space-y-2">
               <li><button onClick={() => setActiveTab('products')} className="hover:text-blue-800 transition-colors">Products</button></li>
-              <li><button onClick={() => setActiveTab('solutions')} className="hover:text-blue-800 transition-colors">Solutions</button></li>
               <li><button onClick={() => setActiveTab('support')} className="hover:text-blue-800 transition-colors">Support</button></li>
             </ul>
           </div>
