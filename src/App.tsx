@@ -27,6 +27,8 @@ import {
   Shield,
   Truck,
   Zap,
+  Menu,
+  X,
 } from 'lucide-react';
 import { IndustryDetail } from './components/IndustryDetail';
 
@@ -526,8 +528,8 @@ const ViewSupport = () => (
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
 
-  // 모바일 메뉴 토글 상태 (필요 시 확장 가능)
-  // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // 모바일 메뉴 토글 상태
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedIndustryId, setSelectedIndustryId] = useState<string | null>(null);
 
   const renderView = () => {
@@ -591,7 +593,53 @@ export default function App() {
               교육 서비스 신청
             </button>
           </div>
+
+          {/* 모바일 햄버거 메뉴 버튼 */}
+          <button 
+            className="md:hidden text-slate-700 hover:text-blue-600"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* 모바일 네비게이션 패널 */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="md:hidden border-t border-slate-200 bg-white overflow-hidden"
+            >
+              <div className="px-6 py-4 flex flex-col gap-4 shadow-inner">
+                {SITE_DATA.nav.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveTab(item.id);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`text-left font-medium text-lg py-2 border-b border-slate-100 last:border-0 ${
+                      activeTab === item.id ? 'text-blue-600' : 'text-slate-700'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+                <button 
+                  onClick={() => {
+                    setActiveTab('support');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-3 rounded-lg text-center transition-colors font-semibold mt-2 shadow-sm"
+                >
+                  교육 서비스 신청
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Main Content Area with AnimatePresence for SPA transitions */}
